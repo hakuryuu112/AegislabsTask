@@ -1,0 +1,26 @@
+﻿@model List<AegislabsProject.Models.ModelDTO.KRSDto>
+
+<h2>Data KRS</h2>
+<table border="1" cellpadding="5" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Mahasiswa</th>
+            <th>Mata Kuliah</th>
+            <th>SKS</th>
+            <th>Semester</th>
+            <th>Tahun Ajaran</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NamaMahasiswa</td>
+                <td>@item.NamaMataKuliah</td>
+                <td>@item.SKS</td>
+                <td>@item.Semester</td>
+                <td>@item.TahunAjaran</td>
+            </tr>
+        }
+    </tbody>
+</table>
