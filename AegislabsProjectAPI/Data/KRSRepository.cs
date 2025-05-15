@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using AegislabsProjectAPI.Models;
 using AegislabsProjectAPI.Models.ModelDTO;
+using AegislabsProjectAPI.Models.ModelRequest;
 using Microsoft.Data.SqlClient;
 
 namespace AegislabsProjectAPI.Data
@@ -10,8 +11,8 @@ namespace AegislabsProjectAPI.Data
         List<KRSDto> GetAllKRS();
         KRSDto GetById(Guid Id);
 
-        void Add(KRSModel model);
-        void Update(Guid id, KRSModel model); 
+        void Add(KRSRequest model);
+        void Update(Guid id, KRSRequest model); 
         void Delete(Guid id);
     }
     public class KRSRepository : IKRSRepository
@@ -79,15 +80,14 @@ namespace AegislabsProjectAPI.Data
             return null;
         }
 
-        public void Add(KRSModel model)
+        public void Add(KRSRequest model)
         {
             using var conn = _dbHelper.GetConnection();
             using var cmd = new SqlCommand(@"
                 INSERT INTO KRS (Id, MahasiswaId, MataKuliahId, Semester, TahunAjaran, CreatedAt, UpdatedAt)
-                VALUES (@Id, @MahasiswaId, @MataKuliahId, @Semester, @TahunAjaran, GETDATE(), GETDATE())
+                VALUES (NEWID(), @MahasiswaId, @MataKuliahId, @Semester, @TahunAjaran, GETDATE(), GETDATE())
             ", conn);
 
-            cmd.Parameters.AddWithValue("@Id", model.Id);
             cmd.Parameters.AddWithValue("@MahasiswaId", model.MahasiswaId);
             cmd.Parameters.AddWithValue("@MataKuliahId", model.MataKuliahId);
             cmd.Parameters.AddWithValue("@Semester", model.Semester);
@@ -97,7 +97,7 @@ namespace AegislabsProjectAPI.Data
             cmd.ExecuteNonQuery();
         }
 
-        public void Update(Guid id, KRSModel model)
+        public void Update(Guid id, KRSRequest model)
         {
             using var conn = _dbHelper.GetConnection();
             using var cmd = new SqlCommand(@"

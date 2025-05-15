@@ -1,6 +1,7 @@
 ﻿using AegislabsProjectAPI.Data;
 using AegislabsProjectAPI.DBContexts;
 using AegislabsProjectAPI.Models;
+using AegislabsProjectAPI.Models.ModelRequest;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,17 +37,15 @@ namespace AegislabsProjectAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] KRSModel model)
+        public IActionResult Create([FromBody] KRSRequest model)
         {
-            model.Id = Guid.NewGuid();
-
             _repository.Add(model);
 
             return Ok(new { message = "Data berhasil ditambahkan." });
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(Guid id, [FromBody] KRSModel model)
+        public IActionResult Update(Guid id, [FromBody] KRSRequest model)
         {
             _repository.Update(id, model);
 
