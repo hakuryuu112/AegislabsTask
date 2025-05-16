@@ -1,6 +1,6 @@
 # AegislabsTask
 
-Sebelum memulai Restore Database di solution AegislabsProjectAPI folder DBBackup.
+Sebelum memulai Restore Database di solution AegislabsProjectAPI folder DBBackup dan ubah settingan di appsetting.json sesuai dengan database yg dimiliki.
 Setelah itu jalankan Query Stored Procedure ddi Folder Stored Procedure.
 
 Untuk menjalankan aplikasinya jalankan solution AegislabsTask untuk menjalankan API dan Frondend nya. 
